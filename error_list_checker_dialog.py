@@ -18,7 +18,6 @@ class ErrorListCheckerDialog(QDialog):
         self.label_layer = QLabel('Select a Layer:')
         self.layout.addWidget(self.label_layer)
         self.combo_layers = QComboBox()
-        self.populate_layers()  # Populate the layer list on initialization
         self.layout.addWidget(self.combo_layers)
 
         # JSON File Selection
@@ -38,19 +37,29 @@ class ErrorListCheckerDialog(QDialog):
 
         self.json_file_path = None
 
+    def showEvent(self, event):
+        """Override the showEvent to refresh the layer list each time the dialog is shown."""
+        self.populate_layers()
+        super().showEvent(event)  # Call the base class implementation
+
     def populate_layers(self):
         # Clear previous items
         self.combo_layers.clear()
         
         # Get all vector layers from the current project
         layers = QgsProject.instance().mapLayers().values()
+        found_layers = False  # Flag to check if any layers are found
         for layer in layers:
+            print(f"Layer name: {layer.name()}, Layer type: {type(layer)}")  # Debugging output
             if isinstance(layer, QgsVectorLayer) and layer.name().endswith('_SF'):
                 self.combo_layers.addItem(layer.name(), layer)
+                found_layers = True  # Found at least one layer
 
-        # Check if layers were added
-        if self.combo_layers.count() == 0:
+        # Update the label if no layers were added
+        if not found_layers:
             self.label_layer.setText("No vector layers available with '_SF' suffix.")
+        else:
+            self.label_layer.setText("Select a Layer:")
 
     def select_json_file(self):
         self.json_file_path, _ = QFileDialog.getOpenFileName(self, "Select JSON File", "", "JSON Files (*.json)")
@@ -59,14 +68,14 @@ class ErrorListCheckerDialog(QDialog):
             self.save_json_setting()  # Save the selected JSON file path
 
     def load_json_setting(self):
-        settings = QSettings("YourOrganization", "ErrorListChecker")
+        settings = QSettings("PSA", "ErrorListChecker")
         saved_json_path = settings.value("json_file_path", "")
         if saved_json_path:
             self.json_file_path = saved_json_path
             self.label_json.setText(f'Selected: {self.json_file_path}')
 
     def save_json_setting(self):
-        settings = QSettings("YourOrganization", "ErrorListChecker")
+        settings = QSettings("PSA", "ErrorListChecker")
         settings.setValue("json_file_path", self.json_file_path)
 
     def run_error_check(self):
