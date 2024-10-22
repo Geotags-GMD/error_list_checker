@@ -106,6 +106,8 @@ class ErrorListCheckerDialog(QDialog):
         ])
         error_layer.updateFields()
 
+        error_count = 0  # Initialize error count
+
         # Iterate through features in the selected layer
         for feature in layer.getFeatures():
             fac_name_value = feature[fac_name_field]  # Facility name from the layer
@@ -146,6 +148,7 @@ class ErrorListCheckerDialog(QDialog):
 
                 # Add the feature to the error layer
                 provider.addFeature(error_feature)
+                error_count += 1  # Increment the error count
 
         # Add the error layer to the QGIS project
         QgsProject.instance().addMapLayer(error_layer)
@@ -158,7 +161,10 @@ class ErrorListCheckerDialog(QDialog):
         symbol.setColor(QColor("red"))  # Set color to red
         error_layer.triggerRepaint()  # Repaint the layer with the new style
 
-        QMessageBox.information(self, "Success", "Error list layer created with recommended sector.")
+        # Show the total count in the message box
+        QMessageBox.information(self, "Errors", f"Errors detected: {error_count}. "
+        "Please update the errors accordingly.")
+
 
 
 
