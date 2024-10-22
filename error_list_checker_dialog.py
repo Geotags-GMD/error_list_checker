@@ -36,6 +36,10 @@ class ErrorListCheckerDialog(QDialog):
         self.run_button.clicked.connect(self.run_error_check)
         self.layout.addWidget(self.run_button)
 
+        # Add version label at the bottom
+        version_label = QLabel("GMD | Version: 1.1 - beta")
+        self.layout.addWidget(version_label)
+
         self.json_file_path = None
 
     def showEvent(self, event):
@@ -93,6 +97,7 @@ class ErrorListCheckerDialog(QDialog):
         cbms_geoid_field = 'cbms_geoid'  # Field for geoid
         fac_name_field = 'fac_name'  # Replace with actual facility name field
         sector_field = 'sector'  # Replace with actual sector field
+        
 
         # Create a new temporary memory layer for storing the error list
         error_layer = QgsVectorLayer("Point?crs=EPSG:4326", "Error List", "memory")
