@@ -1,6 +1,7 @@
 from qgis.PyQt.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QFileDialog, QMessageBox
 from qgis.core import QgsProject, QgsVectorLayer, QgsField, QgsFeature
 from qgis.PyQt.QtCore import QVariant, QSettings
+from qgis.PyQt.QtGui import QColor  # Import QColor from QtGui
 import json
 
 class ErrorListCheckerDialog(QDialog):
@@ -89,7 +90,7 @@ class ErrorListCheckerDialog(QDialog):
             validation_criteria = json.load(json_file)
 
         # Define the attribute fields
-        cbms_geoid_field = 'cbms_geoid'  # Updated to the correct field name
+        cbms_geoid_field = 'cbms_geoid'  # Field for geoid
         fac_name_field = 'fac_name'  # Replace with actual facility name field
         sector_field = 'sector'  # Replace with actual sector field
 
@@ -97,38 +98,46 @@ class ErrorListCheckerDialog(QDialog):
         error_layer = QgsVectorLayer("Point?crs=EPSG:4326", "Error List", "memory")
         provider = error_layer.dataProvider()
 
-        # Add fields for CBMS geoid and remark
+        # Add fields for CBMS geoid, recommended category, and remark
         provider.addAttributes([
             QgsField("cbms_geoid", QVariant.String),
+            QgsField("recommended_sector", QVariant.String),  # New category field for recommended sector
             QgsField("remark", QVariant.String)
         ])
         error_layer.updateFields()
 
-        # New remark template with updated wording
-        remark_template = "Invalid: Facility name or sector doesn't match the expected category. Please verify and update the category."
-
         # Iterate through features in the selected layer
         for feature in layer.getFeatures():
-            fac_name_value = feature[fac_name_field]
-            sector_value = feature[sector_field]
-            cbms_geoid = feature[cbms_geoid_field]
+            fac_name_value = feature[fac_name_field]  # Facility name from the layer
+            sector_value = feature[sector_field]  # Sector from the layer
+            cbms_geoid = feature[cbms_geoid_field]  # Geoid from the layer
+
+            matched_sector = None  # Variable to store the recommended sector based on keywords
+            keyword_matched = None  # Track which keyword caused the match
 
             # Check against all validation criteria
-            is_valid = False
             for category in validation_criteria['categories']:
-                if (any(keyword in str(fac_name_value).lower() for keyword in category['keywords']) and
-                        sector_value == category['sector']):
-                    is_valid = True
-                    break
+                for keyword in category['keywords']:
+                    if keyword.lower() in str(fac_name_value).lower():
+                        matched_sector = category['sector']  # Recommended sector from JSON
+                        keyword_matched = keyword  # Save the matched keyword for remark
+                        break  # Stop checking once a match is found
+                if matched_sector:
+                    break  # Stop if a matching sector is found
 
-            if not is_valid:
+            # If a match is found but the sector is incorrect, update it and add to error list
+            if matched_sector and matched_sector != sector_value:
                 # Create a new feature for the error list
                 error_feature = QgsFeature()
-                
-                # Set the CBMS geoid and remark
+
+                # Set the CBMS geoid, the recommended category (sector from JSON), and the remark
                 error_feature.setFields(error_layer.fields())
                 error_feature.setAttribute("cbms_geoid", cbms_geoid)
-                error_feature.setAttribute("remark", remark_template)
+                error_feature.setAttribute("recommended_sector", matched_sector)  # Recommended sector from JSON
+                error_feature.setAttribute(
+                    "remark", 
+                    f"Incorrect sector: '{sector_value}'. Recommended sector is '{matched_sector}' based on the keyword '{keyword_matched}'. Please verify and update the sector."
+                )
 
                 # Optionally, add geometry if needed (e.g., point at feature's centroid)
                 if feature.hasGeometry():
@@ -144,6 +153,17 @@ class ErrorListCheckerDialog(QDialog):
         # Optional: Zoom to the error layer
         self.iface.mapCanvas().zoomToFullExtent()
 
-        QMessageBox.information(self, "Success", "Error list layer created.")
+        # Apply styling to make the points red
+        symbol = error_layer.renderer().symbol()
+        symbol.setColor(QColor("red"))  # Set color to red
+        error_layer.triggerRepaint()  # Repaint the layer with the new style
+
+        QMessageBox.information(self, "Success", "Error list layer created with recommended sector.")
+
+
+
+
+
+
 
    
