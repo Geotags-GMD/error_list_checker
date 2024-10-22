@@ -145,3 +145,5 @@ class ErrorListCheckerDialog(QDialog):
         self.iface.mapCanvas().zoomToFullExtent()
 
         QMessageBox.information(self, "Success", "Error list layer created.")
+
+   
