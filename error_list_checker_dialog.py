@@ -27,9 +27,10 @@ class ErrorListCheckerDialog(QDialog):
         self.layout.addWidget(self.button_json)
         self.label_json = QLabel('No JSON file selected')
         self.layout.addWidget(self.label_json)
-
+        self.json_file_path = None  # Initialize the JSON file path
+        
         # Load saved JSON file path if it exists
-        self.load_json_setting()
+        self.load_json_setting()  # Ensure this is called to load the saved path
 
         # Run Button
         self.run_button = QPushButton('Run Check')
@@ -37,10 +38,9 @@ class ErrorListCheckerDialog(QDialog):
         self.layout.addWidget(self.run_button)
 
         # Add version label at the bottom
-        version_label = QLabel("GMD | Version: 1.1 - beta")
+        version_label = QLabel("GMD | Version: 1.1")
         self.layout.addWidget(version_label)
-
-        self.json_file_path = None
+       
 
     def showEvent(self, event):
         """Override the showEvent to refresh the layer list each time the dialog is shown."""
@@ -70,28 +70,43 @@ class ErrorListCheckerDialog(QDialog):
         self.json_file_path, _ = QFileDialog.getOpenFileName(self, "Select JSON File", "", "JSON Files (*.json)")
         if self.json_file_path:
             self.label_json.setText(f'Selected: {self.json_file_path}')
-            self.save_json_setting()  # Save the selected JSON file path
+            self.save_json_setting()  # Save the selected JSON file path immediately
 
     def load_json_setting(self):
-        settings = QSettings("PSA", "ErrorListChecker")
+        settings = QSettings()
         saved_json_path = settings.value("json_file_path", "")
         if saved_json_path:
             self.json_file_path = saved_json_path
-            self.label_json.setText(f'Selected: {self.json_file_path}')
+            self.label_json.setText(f'Selected: {self.json_file_path}')  # Update label with loaded path
+        else:
+            self.json_file_path = None  # Ensure it's None if no path is saved
 
     def save_json_setting(self):
-        settings = QSettings("PSA", "ErrorListChecker")
-        settings.setValue("json_file_path", self.json_file_path)
+        settings = QSettings()
+        settings.setValue("json_file_path", self.json_file_path)  # Save the path to settings
 
     def run_error_check(self):
         layer = self.combo_layers.currentData()
-        if not self.json_file_path or not layer:
-            QMessageBox.warning(self, "Warning", "Please select a layer and a JSON file.")
-            return
+        # Check if the layer is selected
+        if not layer:
+            QMessageBox.warning(self, "Warning", "Please select a layer.")
+            return  # Exit the method if no layer is selected
+
+        # Debugging output to check the value of json_file_path
+        print(f"JSON file path: {self.json_file_path}")  # Debugging line
+
+        # Use the saved JSON file path if it exists
+        if not self.json_file_path:
+            QMessageBox.warning(self, "Warning", "Please select a JSON file.")
+            return  # Exit the method if no JSON file path is set
 
         # Load validation criteria from the selected JSON file
-        with open(self.json_file_path, 'r') as json_file:
-            validation_criteria = json.load(json_file)
+        try:
+            with open(self.json_file_path, 'r') as json_file:
+                validation_criteria = json.load(json_file)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load JSON file: {e}")
+            return  # Exit if there is an error loading the file
 
         # Define the attribute fields
         cbms_geoid_field = 'cbms_geoid'  # Field for geoid
@@ -159,7 +174,9 @@ class ErrorListCheckerDialog(QDialog):
         QgsProject.instance().addMapLayer(error_layer)
 
         # Optional: Zoom to the error layer
-        self.iface.mapCanvas().zoomToFullExtent()
+        # self.iface.mapCanvas().zoomToFullExtent()  # Original line
+        self.iface.mapCanvas().setExtent(error_layer.extent())  # Updated line to zoom to the error points
+        self.iface.mapCanvas().refresh()  # Refresh the canvas to apply the zoom
 
         # Apply styling to make the points red
         symbol = error_layer.renderer().symbol()
@@ -178,3 +195,4 @@ class ErrorListCheckerDialog(QDialog):
 
 
    
+
