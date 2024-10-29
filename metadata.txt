@@ -5,12 +5,12 @@
 [general]
 name=Error List Checker
 qgisMinimumVersion=3.0
-description=Error List Checker
-version=0.1
-author=PSA
-email=test@gmail.com
+description=This plugin allows users to validate geospatial data by checking for discrepancies in facility names and sector categories. It generates a detailed error list for review.
+version=1.1
+author=Philippine Statistics Authority | GMD
+email=kedeleon.psagmd@gmail.com
 
-about=Provide a brief description of the plugin and its purpose.
+about=The Error List Checker plugin provides an intuitive interface for validating attributes within geospatial data layers in QGIS. Users can select layers, specify validation criteria, and generate an error list for facilities that do not meet the required conditions.
 
 tracker=http://bugs
 repository=http://repo

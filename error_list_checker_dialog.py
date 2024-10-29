@@ -1,7 +1,8 @@
-from qgis.PyQt.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QFileDialog, QMessageBox
+from qgis.PyQt.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QMessageBox
 from qgis.core import QgsProject, QgsVectorLayer, QgsField, QgsFeature
 from qgis.PyQt.QtCore import QVariant, QSettings
-from qgis.PyQt.QtGui import QColor  # Import QColor from QtGui
+from qgis.PyQt.QtGui import QColor
+import os
 import json
 
 class ErrorListCheckerDialog(QDialog):
@@ -21,17 +22,6 @@ class ErrorListCheckerDialog(QDialog):
         self.combo_layers = QComboBox()
         self.layout.addWidget(self.combo_layers)
 
-        # JSON File Selection
-        self.button_json = QPushButton('Select JSON File')
-        self.button_json.clicked.connect(self.select_json_file)
-        self.layout.addWidget(self.button_json)
-        self.label_json = QLabel('No JSON file selected')
-        self.layout.addWidget(self.label_json)
-        self.json_file_path = None  # Initialize the JSON file path
-        
-        # Load saved JSON file path if it exists
-        self.load_json_setting()  # Ensure this is called to load the saved path
-
         # Run Button
         self.run_button = QPushButton('Run Check')
         self.run_button.clicked.connect(self.run_error_check)
@@ -40,7 +30,6 @@ class ErrorListCheckerDialog(QDialog):
         # Add version label at the bottom
         version_label = QLabel("GMD | Version: 1.1")
         self.layout.addWidget(version_label)
-       
 
     def showEvent(self, event):
         """Override the showEvent to refresh the layer list each time the dialog is shown."""
@@ -55,64 +44,38 @@ class ErrorListCheckerDialog(QDialog):
         layers = QgsProject.instance().mapLayers().values()
         found_layers = False  # Flag to check if any layers are found
         for layer in layers:
-            print(f"Layer name: {layer.name()}, Layer type: {type(layer)}")  # Debugging output
             if isinstance(layer, QgsVectorLayer) and layer.name().endswith('_SF'):
                 self.combo_layers.addItem(layer.name(), layer)
                 found_layers = True  # Found at least one layer
 
         # Update the label if no layers were added
         if not found_layers:
-            self.label_layer.setText("No vector layers available with '_SF' suffix.")
+            self.label_layer.setText("No vector layers available")
         else:
             self.label_layer.setText("Select a Layer:")
 
-    def select_json_file(self):
-        self.json_file_path, _ = QFileDialog.getOpenFileName(self, "Select JSON File", "", "JSON Files (*.json)")
-        if self.json_file_path:
-            self.label_json.setText(f'Selected: {self.json_file_path}')
-            self.save_json_setting()  # Save the selected JSON file path immediately
-
-    def load_json_setting(self):
-        settings = QSettings()
-        saved_json_path = settings.value("json_file_path", "")
-        if saved_json_path:
-            self.json_file_path = saved_json_path
-            self.label_json.setText(f'Selected: {self.json_file_path}')  # Update label with loaded path
-        else:
-            self.json_file_path = None  # Ensure it's None if no path is saved
-
-    def save_json_setting(self):
-        settings = QSettings()
-        settings.setValue("json_file_path", self.json_file_path)  # Save the path to settings
-
     def run_error_check(self):
         layer = self.combo_layers.currentData()
-        # Check if the layer is selected
         if not layer:
             QMessageBox.warning(self, "Warning", "Please select a layer.")
-            return  # Exit the method if no layer is selected
+            return
 
-        # Debugging output to check the value of json_file_path
-        print(f"JSON file path: {self.json_file_path}")  # Debugging line
+        # Define the path to the JSON file within the plugin folder
+        plugin_path = os.path.dirname(__file__)
+        json_file_path = os.path.join(plugin_path, "validation_criteria.json")
 
-        # Use the saved JSON file path if it exists
-        if not self.json_file_path:
-            QMessageBox.warning(self, "Warning", "Please select a JSON file.")
-            return  # Exit the method if no JSON file path is set
-
-        # Load validation criteria from the selected JSON file
+        # Load validation criteria from the JSON file
         try:
-            with open(self.json_file_path, 'r') as json_file:
+            with open(json_file_path, 'r') as json_file:
                 validation_criteria = json.load(json_file)
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load JSON file: {e}")
-            return  # Exit if there is an error loading the file
+            return
 
         # Define the attribute fields
         cbms_geoid_field = 'cbms_geoid'  # Field for geoid
         fac_name_field = 'fac_name'  # Replace with actual facility name field
         sector_field = 'sector'  # Replace with actual sector field
-        
 
         # Create a new temporary memory layer for storing the error list
         error_layer = QgsVectorLayer("Point?crs=EPSG:4326", "Error List", "memory")
@@ -121,7 +84,7 @@ class ErrorListCheckerDialog(QDialog):
         # Add fields for CBMS geoid, recommended category, and remark
         provider.addAttributes([
             QgsField("cbms_geoid", QVariant.String),
-            QgsField("recommended_sector", QVariant.String),  # New category field for recommended sector
+            QgsField("recommended_sector", QVariant.String),
             QgsField("remark", QVariant.String)
         ])
         error_layer.updateFields()
@@ -141,11 +104,11 @@ class ErrorListCheckerDialog(QDialog):
             for category in validation_criteria['categories']:
                 for keyword in category['keywords']:
                     if keyword.lower() in str(fac_name_value).lower():
-                        matched_sector = category['sector']  # Recommended sector from JSON
-                        keyword_matched = keyword  # Save the matched keyword for remark
-                        break  # Stop checking once a match is found
+                        matched_sector = category['sector']
+                        keyword_matched = keyword
+                        break
                 if matched_sector:
-                    break  # Stop if a matching sector is found
+                    break
 
             # If a match is found but the sector is incorrect, update it and add to error list
             if matched_sector and matched_sector != sector_value:
@@ -155,7 +118,7 @@ class ErrorListCheckerDialog(QDialog):
                 # Set the CBMS geoid, the recommended category (sector from JSON), and the remark
                 error_feature.setFields(error_layer.fields())
                 error_feature.setAttribute("cbms_geoid", cbms_geoid)
-                error_feature.setAttribute("recommended_sector", matched_sector)  # Recommended sector from JSON
+                error_feature.setAttribute("recommended_sector", matched_sector)
                 error_feature.setAttribute(
                     "remark", 
                     f"Incorrect sector: '{sector_value}'. Recommended sector is '{matched_sector}' based on the keyword '{keyword_matched}'. Please verify and update the sector."
@@ -174,25 +137,18 @@ class ErrorListCheckerDialog(QDialog):
         QgsProject.instance().addMapLayer(error_layer)
 
         # Optional: Zoom to the error layer
-        # self.iface.mapCanvas().zoomToFullExtent()  # Original line
-        self.iface.mapCanvas().setExtent(error_layer.extent())  # Updated line to zoom to the error points
-        self.iface.mapCanvas().refresh()  # Refresh the canvas to apply the zoom
+        self.iface.mapCanvas().setExtent(error_layer.extent())
+        self.iface.mapCanvas().refresh()
 
-        # Apply styling to make the points red
-        symbol = error_layer.renderer().symbol()
-        symbol.setColor(QColor("red"))  # Set color to red
-        error_layer.triggerRepaint()  # Repaint the layer with the new style
+        # Automatically apply QML styling from the built-in QML file
+        qml_path = os.path.join(os.path.dirname(__file__), "error-list-style.qml")
+
+        # Check if the QML file exists and apply it
+        if os.path.exists(qml_path):
+            error_layer.loadNamedStyle(qml_path)
+            error_layer.triggerRepaint()
+        else:
+            QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
 
         # Show the total count in the message box
-        QMessageBox.information(self, "Errors", f"Errors detected: {error_count}. "
-        "Please update the errors accordingly.")
-
-
-
-
-
-
-
-
-   
-
+        QMessageBox.information(self, "Errors", f"Errors detected: {error_count}. Please update the errors accordingly.")
