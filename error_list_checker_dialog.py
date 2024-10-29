@@ -136,9 +136,9 @@ class ErrorListCheckerDialog(QDialog):
         # Add the error layer to the QGIS project
         QgsProject.instance().addMapLayer(error_layer)
 
-        # Optional: Zoom to the error layer
-        self.iface.mapCanvas().setExtent(error_layer.extent())
-        self.iface.mapCanvas().refresh()
+        # # Optional: Zoom to the error layer
+        # self.iface.mapCanvas().setExtent(error_layer.extent())
+        # self.iface.mapCanvas().refresh()
 
         # Automatically apply QML styling from the built-in QML file
         qml_path = os.path.join(os.path.dirname(__file__), "error-list-style.qml")
