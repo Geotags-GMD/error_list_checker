@@ -24,14 +24,16 @@ The **Error List Checker** plugin allows users to validate geospatial data by ch
 The generated error list will contain the following fields:
 
 - **cbms_geoid**: The unique identifier for the facility.
+- **recommended_sector**: Suggested sector that should be applied to the facility.
 - **remark**: A message describing the nature of the error or necessary action.
 
 ### Example Error List Entry
 
-| cbms_geoid | remark                                                                          |
-|------------|---------------------------------------------------------------------------------|
-| 12345      | Invalid: Facility name or sector doesn't match the expected category.           |
-| 67890      | Need to change category to 02_EDUCATION AND LITERACY.                          |
+| cbms_geoid | remark                                                                          | recommended_sector                     |
+|------------|--------------------------------------------------------------------------------|---------------------------------------|
+| 12345      | Invalid: Facility name or sector doesn't match the expected category.          | 02_EDUCATION AND LITERACY            |
+| 67890      | Need to change category to 02_EDUCATION AND LITERACY.                         | 02_EDUCATION AND LITERACY            |
+
 
 ## License
 
