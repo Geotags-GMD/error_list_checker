@@ -50,7 +50,7 @@ class ErrorListCheckerDialog(QDialog):
 
         # Update the label if no layers were added
         if not found_layers:
-            self.label_layer.setText("No vector layers available with '_SF' suffix.")
+            self.label_layer.setText("No vector layers available")
         else:
             self.label_layer.setText("Select a Layer:")
 
@@ -140,10 +140,15 @@ class ErrorListCheckerDialog(QDialog):
         self.iface.mapCanvas().setExtent(error_layer.extent())
         self.iface.mapCanvas().refresh()
 
-        # Apply styling to make the points red
-        symbol = error_layer.renderer().symbol()
-        symbol.setColor(QColor("red"))
-        error_layer.triggerRepaint()
+        # Automatically apply QML styling from the built-in QML file
+        qml_path = os.path.join(os.path.dirname(__file__), "error-list-style.qml")
+
+        # Check if the QML file exists and apply it
+        if os.path.exists(qml_path):
+            error_layer.loadNamedStyle(qml_path)
+            error_layer.triggerRepaint()
+        else:
+            QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
 
         # Show the total count in the message box
         QMessageBox.information(self, "Errors", f"Errors detected: {error_count}. Please update the errors accordingly.")
