@@ -1,0 +1,40 @@
+{
+    "categories": [
+        {
+            "keywords": ["hospital", "clinic", "health", "health center", "medical facility", "urgent care", "pharmacy", "ospital", "klinika", "sentro ng kalusugan", "botika"],
+            "sector": "01_HEALTHCARE"
+        },
+        {
+            "keywords": ["school", "university", "college", "educational institution", "vocational training", "adult education", "preschool", "kindergarten", "paaralan", "unibersidad", "kolehiyo", "institusyon ng edukasyon", "bokasyonal na pagsasanay"],
+            "sector": "02_EDUCATION AND LITERACY"
+        },
+        {
+            "keywords": ["library", "community center", "park", "recreation area", "sports complex", "civic center", "museum", "art gallery", "aklatan", "sentro ng komunidad", "parke", "museo", "gallerya ng sining"],
+            "sector": "03_PUBLIC BUILDING AND OPEN SPACE"
+        },
+        {
+            "keywords": ["police", "fire station", "emergency services", "safety", "civil defense", "disaster response", "ambulance", "security", "pulis", "istasyon ng bumbero", "serbisyo pang-emergency", "kaligtasan", "ambulansya", "seguridad"],
+            "sector": "04_PUBLIC SAFETY"
+        },
+        {
+            "keywords": ["farm", "agricultural land", "plantation", "public enterprise", "crop production", "livestock", "agro-industry", "fishing", "bukid", "lupang sakahan", "plantasyon", "produksyon ng pananim", "pangingisda", "agro-industriya"],
+            "sector": "05_AGRICULTURE AND PUBLIC ENTERPRISE"
+        },
+        {
+            "keywords": ["electricity", "water supply", "gas", "sewage", "telecommunications", "internet service", "wastewater treatment", "kuryente", "tubig", "gas", "alkantarilya", "telekomunikasyon", "serbisyo sa internet"],
+            "sector": "06_UTILITY SERVICE"
+        },
+        {
+            "keywords": ["bank", "credit union", "financial services", "investment firm", "insurance company", "loan agency", "microfinance", "savings and loan", "bangko", "serbisyong pinansyal", "kumpanya ng seguro", "loan agency"],
+            "sector": "07_FINANCIAL AND CREDIT INSTITUTION"
+        },
+        {
+            "keywords": ["dump", "waste management", "recycling center", "landfill", "hazardous waste disposal", "composting", "litter collection", "sanitation", "basurahan", "pamamahala ng basura", "tapunan ng basura", "kompost", "kalinisan"],
+            "sector": "08_GARBAGE AND WASTE DISPOSAL"
+        },
+        {
+            "keywords": ["bus", "train", "airport", "taxi", "transportation services", "subway", "bike share", "ride-sharing", "public transport", "bus", "tren", "paliparan", "taxi", "serbisyo sa transportasyon", "pampublikong transportasyon"],
+            "sector": "09_TRANSPORT"
+        }
+    ]
+}
