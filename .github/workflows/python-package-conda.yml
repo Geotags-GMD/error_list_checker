@@ -1,0 +1,48 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on tags that start with "v"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Specify the Python version you need
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt  # Adjust according to your dependencies
+
+      - name: Build Plugin
+        run: |
+          # Include the commands to build your QGIS plugin, e.g.:
+          python setup.py sdist bdist_wheel  # Adjust based on your build process
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          files: |
+            dist/*.whl  # Adjust based on your output files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
