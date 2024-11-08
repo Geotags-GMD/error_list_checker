@@ -1,0 +1,56 @@
+{
+    "categories": [
+        {
+            "keywords": ["road", "bridge", "railway", "highway", "public transport", "airport", "seaport", "bus terminal", "transportation hub", "kalsada", "tulay", "riles", "highway", "pampublikong transportasyon", "paliparan", "daungan", "terminal ng bus", "sentro ng transportasyon"],
+            "sector": "01_PHYSICAL CONNECTIVITY"
+        },
+        {
+            "keywords": ["hospital", "clinic", "health center", "pharmacy", "medical facility", "urgent care", "nursing home", "telemedicine", "ospital", "klinika", "sentro ng kalusugan", "botika", "pasilidad medikal", "nursing home", "telemedicine"],
+            "sector": "02_HEALTHCARE"
+        },
+        {
+            "keywords": ["school", "university", "college", "training center", "education", "literacy program", "preschool", "vocational training", "classroom", "paaralan", "unibersidad", "kolehiyo", "sentro ng pagsasanay", "edukasyon", "programa ng literasiya", "preschool", "bokasyonal na pagsasanay", "silid-aralan"],
+            "sector": "03_EDUCATION"
+        },
+        {
+            "keywords": ["water supply", "sanitation", "sewage", "water treatment", "irrigation", "clean drinking water", "public toilet", "suplay ng tubig", "kalinisan", "alkantarilya", "paggamot ng tubig", "irigasyon", "malinis na inuming tubig", "pampublikong palikuran"],
+            "sector": "04_WATER AND SANITATION"
+        },
+        {
+            "keywords": ["farm", "agriculture", "crop production", "livestock", "food security", "fisheries", "greenhouse", "agro-processing", "farmers' market", "bukid", "agrikultura", "produksyon ng pananim", "hayupan", "seguridad sa pagkain", "pangingisda", "greenhouse", "pagproseso ng agrikultura", "pamilihan ng magsasaka"],
+            "sector": "05_AGRICULTURE/FOOD SECURITY"
+        },
+        {
+            "keywords": ["electricity", "power grid", "solar energy", "wind energy", "hydroelectric power", "energy distribution", "renewable energy", "power plant", "kuryente", "grid ng kuryente", "enerhiyang solar", "enerhiyang hangin", "hydroelectric power", "distribusyon ng enerhiya", "renewable energy", "plantang kuryente"],
+            "sector": "06_ENERGY AND POWER"
+        },
+        {
+            "keywords": ["waste management", "landfill", "recycling", "garbage collection", "composting", "hazardous waste", "sanitation services", "pamamahala ng basura", "tapunan ng basura", "recycling", "koleksyon ng basura", "kompost", "mapanganib na basura", "serbisyo sa kalinisan"],
+            "sector": "07_SOLID WASTE MANAGEMENT"
+        },
+        {
+            "keywords": ["police station", "fire station", "emergency services", "disaster response", "security", "surveillance", "safety measures", "community watch", "istasyon ng pulis", "istasyon ng bumbero", "serbisyo pang-emergency", "tugon sa sakuna", "seguridad", "surveillance", "mga hakbang pangkaligtasan", "bantay komunidad"],
+            "sector": "08_SAFETY AND SECURITY"
+        },
+        {
+            "keywords": ["tourist attraction", "heritage site", "park", "museum", "resort", "tourism center", "beach", "ecotourism", "atraksyon ng turista", "makasaysayang lugar", "parke", "museo", "resort", "sentro ng turismo", "dalampasigan", "ecotourism"],
+            "sector": "09_TOURISM"
+        },
+        {
+            "keywords": ["housing", "residential area", "apartment", "subdivision", "urban planning", "low-income housing", "settlement", "pabahay", "residential na lugar", "apartment", "subdivision", "urban planning", "pabahay para sa mababang kita", "pamayanan"],
+            "sector": "10_HOUSING AND SETTLEMENT"
+        },
+        {
+            "keywords": ["internet", "telecommunications", "broadband", "cellular network", "WiFi", "fiber optics", "digital access", "online services", "internet", "telekomunikasyon", "broadband", "cellular network", "WiFi", "fiber optics", "digital na pag-access", "online na serbisyo"],
+            "sector": "11_ICT/DIGITAL CONNECTIVITY"
+        },
+        {
+            "keywords": ["real estate", "property development", "commercial building", "office complex", "industrial park", "business center", "real estate", "pagpapaunlad ng ari-arian", "komersyal na gusali", "complex ng opisina", "parke industriyal", "sentro ng negosyo"],
+            "sector": "12_PROPERTY DEVELOPMENT"
+        },
+        {
+            "keywords": ["infrastructure", "public works", "construction", "urban development", "transportation", "utilities", "facilities", "imprastruktura", "gawaing pambayan", "konstruksyon", "urban na pag-unlad", "transportasyon", "mga utility", "mga pasilidad"],
+            "sector": "99_OTHER INFRASTRUCTURE"
+        }
+    ]
+}
