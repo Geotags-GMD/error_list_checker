@@ -10,7 +10,7 @@ class ErrorListCheckerDialog(QDialog):
         super().__init__()
         self.iface = iface  # Save iface for later use
         self.setWindowTitle('Error List Checker')
-        self.setFixedWidth(300)  # Set the width of the dialog to 300 pixels
+        self.setFixedWidth(200)  # Set the width of the dialog to 300 pixels
 
         # Create layout
         self.layout = QVBoxLayout()
@@ -162,7 +162,7 @@ class ErrorListCheckerDialog(QDialog):
             QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
 
         # Show the total count in the message box
-        QMessageBox.information(self, "SF Errors", f"Errors detected: {error_count}. Please update the errors accordingly.")
+        QMessageBox.information(self, "SF Errors", f"SF Errors detected: {error_count}. Please update the errors accordingly.")
 
     def run_error_check_gp(self, layer):
         # layer = self.combo_layers.currentData()
@@ -261,4 +261,4 @@ class ErrorListCheckerDialog(QDialog):
             QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
 
         # Show the total count in the message box
-        QMessageBox.information(self, "GP Errors", f"Errors detected: {error_count}. Please update the errors accordingly.")
+        QMessageBox.information(self, "GP Errors", f"GP Errors detected: {error_count}. Please update the errors accordingly.")
