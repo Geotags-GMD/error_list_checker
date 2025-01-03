@@ -1,0 +1,12 @@
+{
+    "corrections": [
+        {
+            "wrong": ["scool", "schol", "scools"],
+            "correct": "school"
+        },
+        {
+            "wrong": ["hospitl", "hosptal"],
+            "correct": "hospital"
+        }
+    ]
+}

@@ -1,56 +1,330 @@
 {
-    "categories": [
-        {
-            "keywords": ["road", "bridge", "railway", "highway", "public transport", "airport", "seaport", "bus terminal", "transportation hub", "kalsada", "tulay", "riles", "highway", "pampublikong transportasyon", "paliparan", "daungan", "terminal ng bus", "sentro ng transportasyon"],
-            "sector": "01_PHYSICAL CONNECTIVITY"
-        },
-        {
-            "keywords": ["hospital", "clinic", "health center", "pharmacy", "medical facility", "urgent care", "nursing home", "telemedicine", "ospital", "klinika", "sentro ng kalusugan", "botika", "pasilidad medikal", "nursing home", "telemedicine"],
-            "sector": "02_HEALTHCARE"
-        },
-        {
-            "keywords": ["school", "university", "college", "training center", "education", "literacy program", "preschool", "vocational training", "classroom", "paaralan", "unibersidad", "kolehiyo", "sentro ng pagsasanay", "edukasyon", "programa ng literasiya", "preschool", "bokasyonal na pagsasanay", "silid-aralan"],
-            "sector": "03_EDUCATION"
-        },
-        {
-            "keywords": ["water supply", "sanitation", "sewage", "water treatment", "irrigation", "clean drinking water", "public toilet", "suplay ng tubig", "kalinisan", "alkantarilya", "paggamot ng tubig", "irigasyon", "malinis na inuming tubig", "pampublikong palikuran"],
-            "sector": "04_WATER AND SANITATION"
-        },
-        {
-            "keywords": ["farm", "agriculture", "crop production", "livestock", "food security", "fisheries", "greenhouse", "agro-processing", "farmers' market", "bukid", "agrikultura", "produksyon ng pananim", "hayupan", "seguridad sa pagkain", "pangingisda", "greenhouse", "pagproseso ng agrikultura", "pamilihan ng magsasaka"],
-            "sector": "05_AGRICULTURE/FOOD SECURITY"
-        },
-        {
-            "keywords": ["electricity", "power grid", "solar energy", "wind energy", "hydroelectric power", "energy distribution", "renewable energy", "power plant", "kuryente", "grid ng kuryente", "enerhiyang solar", "enerhiyang hangin", "hydroelectric power", "distribusyon ng enerhiya", "renewable energy", "plantang kuryente"],
-            "sector": "06_ENERGY AND POWER"
-        },
-        {
-            "keywords": ["waste management", "landfill", "recycling", "garbage collection", "composting", "hazardous waste", "sanitation services", "pamamahala ng basura", "tapunan ng basura", "recycling", "koleksyon ng basura", "kompost", "mapanganib na basura", "serbisyo sa kalinisan"],
-            "sector": "07_SOLID WASTE MANAGEMENT"
-        },
-        {
-            "keywords": ["police station", "fire station", "emergency services", "disaster response", "security", "surveillance", "safety measures", "community watch", "istasyon ng pulis", "istasyon ng bumbero", "serbisyo pang-emergency", "tugon sa sakuna", "seguridad", "surveillance", "mga hakbang pangkaligtasan", "bantay komunidad"],
-            "sector": "08_SAFETY AND SECURITY"
-        },
-        {
-            "keywords": ["tourist attraction", "heritage site", "park", "museum", "resort", "tourism center", "beach", "ecotourism", "atraksyon ng turista", "makasaysayang lugar", "parke", "museo", "resort", "sentro ng turismo", "dalampasigan", "ecotourism"],
-            "sector": "09_TOURISM"
-        },
-        {
-            "keywords": ["housing", "residential area", "apartment", "subdivision", "urban planning", "low-income housing", "settlement", "pabahay", "residential na lugar", "apartment", "subdivision", "urban planning", "pabahay para sa mababang kita", "pamayanan"],
-            "sector": "10_HOUSING AND SETTLEMENT"
-        },
-        {
-            "keywords": ["internet", "telecommunications", "broadband", "cellular network", "WiFi", "fiber optics", "digital access", "online services", "internet", "telekomunikasyon", "broadband", "cellular network", "WiFi", "fiber optics", "digital na pag-access", "online na serbisyo"],
-            "sector": "11_ICT/DIGITAL CONNECTIVITY"
-        },
-        {
-            "keywords": ["real estate", "property development", "commercial building", "office complex", "industrial park", "business center", "real estate", "pagpapaunlad ng ari-arian", "komersyal na gusali", "complex ng opisina", "parke industriyal", "sentro ng negosyo"],
-            "sector": "12_PROPERTY DEVELOPMENT"
-        },
-        {
-            "keywords": ["infrastructure", "public works", "construction", "urban development", "transportation", "utilities", "facilities", "imprastruktura", "gawaing pambayan", "konstruksyon", "urban na pag-unlad", "transportasyon", "mga utility", "mga pasilidad"],
-            "sector": "99_OTHER INFRASTRUCTURE"
-        }
-    ]
+  "categories": [
+    {
+      "keywords": [
+        "RAILING",
+        "ASPHALT",
+        "ROAD",
+        "BRIDGE",
+        "CANALIZATION",
+        "CAUSEWAY",
+        "FOOTBRIDGE",
+        "FEEDER ROAD",
+        "CONCRETING",
+        "ROAD EXTENSION",
+        "ROAD SHOULDER",
+        "PATHWAY",
+        "FARM-TO-MARKET",
+        "FOOT RAIL",
+        "FOOTSTEP",
+        "PANTALAN",
+        "TIRE PATH",
+        "FOOTPATH",
+        "PAVEMENT",
+        "TRAIL",
+        "FMR",
+        "ROADS",
+        "HANGING BRIDGE",
+        "EMBANKMENT",
+        "WHARF",
+        "WALKWAY/RAMP",
+        "PATHWAY",
+        "REBLOCKING",
+        "HUMPS",
+        "GRAVEL ROAD"
+      ],
+      "sector": "01_PHYSICAL CONNECTIVITY"
+    },
+    {
+      "keywords": [
+        "DIALYSIS CENTER",
+        "CLINIC",
+        "BIRTHING HOMES",
+        "CONSTRUCTION OF HANDWASHING FACILITIES",
+        "CENTER",
+        "BARANGAY HEALTH STATION",
+        "BARANGAY HEALTH CENTER",
+        "PRIMARY CARE FACILITY",
+        "QUARANTINE FACILITY",
+        "PROCUREMENT OF MEDICAL EQUIPMENT",
+        "BIRTHING CLINIC",
+        "INFIRMARY",
+        "RHU"
+      ],
+      "sector": "02_HEALTHCARE"
+    },
+    {
+      "keywords": [
+        "ADDITIONAL BUILDING",
+        "CLASSROOM",
+        "LEARNING CENTER",
+        "DAY CARE CENTER",
+        "NURSERY",
+        "READING CENTER",
+        "CHILD DEVELOPMENT CENTER",
+        "ELEMENTARY SCHOOL",
+        "SCHOOL"
+      ],
+      "sector": "03_EDUCATION"
+    },
+    {
+      "keywords": [
+        "DRAINAGE",
+        "CLEARING OF LINE CANALS",
+        "DRAINAGE SYSTEM",
+        "COVERED CANAL",
+        "INTAKE TANK",
+        "OPEN CANAL",
+        "WATER SYSTEM",
+        "RAIN WATER COLLECTOR",
+        "RESERVOIR",
+        "DRAINAGE CANAL",
+        "WATERWORKS",
+        "OVERHEAD",
+        "WATER TANK",
+        "ARTESIAN WELL",
+        "DEEP WELL",
+        "DAM",
+        "DECLOGGING",
+        "CANAL",
+        "SPRING",
+        "ESTERO CLEANING",
+        "WATERSHED/ WATER SOURCES",
+        "PUMPING STATION",
+        "SEWER LINE",
+        "DISTRIBUTION PIPES",
+        "PIPELINE",
+        "PUMPWELL",
+        "JETMATIC PUMP",
+        "DRAINAGE PIPE",
+        "SHALLOW WELL",
+        "WATER SUPPLY",
+        "SALINTUBIG",
+        "SPILLWAY",
+        "WATER DEPOT",
+        "WATER FILTRATION SYSTEM",
+        "WATER IMPOUNDING",
+        "WATER REFILLING STATION",
+        "WATER SOURCE",
+        "WATER SYSTEM"
+      ],
+      "sector": "04_WATER AND SANITATION"
+    },
+    {
+      "keywords": [
+        "BARANGAY MARKET EXTENSION",
+        "BAGSAKAN",
+        "PUBLIC MARKET",
+        "DRYER",
+        "COMMUNITY IRRIGATION SYSTEM",
+        "FISHERY RESEARCH CENTER",
+        "GREENHOUSE",
+        "SHED",
+        "MUSHROOM HOUSE",
+        "SLAUGHTERHOUSE",
+        "POST HARVEST BUILDING/ FACILITY/ SHED",
+        "RABBIT HOUSE",
+        "SATELLITE MARKET",
+        "TRAM LINE",
+        "IRRIGATION CANAL",
+        "DRYING PAVEMENT",
+        "FISH LANDING",
+        "IRRIGATION",
+        "WAREHOUSE",
+        "CIS",
+        "INSTALLATION/ REHABILITATION OF MARKET STALLS",
+        "REFORESTATION/ GREENING PROGRAM/ TREE PLANTING",
+        "FISHPORT",
+        "WET MARKET",
+        "SLAUGHTERHOUSE",
+        "PUBLIC MARKET",
+        "WATER FLUME"
+      ],
+      "sector": "05_AGRICULTURE/FOOD SECURITY"
+    },
+    {
+      "keywords": [
+        "ELECTRIFICATION SYSTEM",
+        "POWER AND WATER SUPPLY",
+        "ELECTRIC POLES",
+        "SOLAR",
+        "SOLAR PANEL/ SOLAR FARM",
+        "TRANSFORMER",
+        "MICRO-HYDRO",
+        "SATELLITE TOWER",
+
+        "ELECTRICITY",
+        "POWER GRID",
+        "SOLAR ENERGY",
+        "WIND ENERGY",
+        "HYDROELECTRIC POWER",
+        "ENERGY DISTRIBUTION",
+        "RENEWABLE ENERGY"
+      ],
+      "sector": "06_ENERGY AND POWER"
+    },
+    {
+      "keywords": [
+        "CLEAN & GREEN",
+        "CLEAN AND BEAUTIFICATION (REPAINTING OF GUTTER)",
+        "RECYCLE CONTAINER BOX",
+        "SANITARY LANDFILL",
+        "ESWM EQUIPMENT SHED",
+        "GARBAGE PICK-UP POINT SHED",
+        "LEACHATE COLLECTION AND REMOVAL SYSTEM",
+        "RESIDUAL CONTAINMENT BOX",
+        "WASTE WATER TREATMENT FACILITY",
+        "MRF",
+        "MATERIAL RECOVERY FACILITY",
+        "CONTINUOUS DEVELOPMENT OF CELL AT MRF",
+        "ECO WASTE CENTER",
+        "ECOLOGICAL SOLID WASTE MANAGEMENT",
+        "RECOVERY FACILITY",
+        "FACILITY",
+        "COMPOSTING BED"
+      ],
+      "sector": "07_SOLID WASTE MANAGEMENT"
+    },
+    {
+      "keywords": [
+        "RIPRAP/RIPRAPPING",
+        "HAZARD/ SLOPE PROTECTION",
+        "LIGHTING FACILITY",
+        "BARANGAY OUTPOST",
+        "BOX CULVERT",
+        "DETENTION CELL",
+        "DIKE",
+        "POLICE STATION",
+        "PROTECTIVE WALL",
+        "RETAINING WALL/ SEAWALL",
+        "STORM DRAINAGE SYSTEM",
+        "GUARD HOUSE",
+        "TANOD OUTPOST",
+        "FLOOD CONTROL",
+        "FABRICATION OF CULVERTS",
+        "FLOOD EROSION CONTROL",
+        "GROUTING",
+        "CRISIS CENTER",
+        "FLOODLIGHTS",
+        "SOLAR LIGHTS",
+        "STREETLIGHTS",
+        "STREETLIGHTING SYSTEM",
+        "SOLAR STREETLIGHTS",
+        "PUBLIC ADDRESS SYSTEM",
+        "RAILINGS",
+        "SIGNAGES",
+        "CCTV",
+        "MULTI-DISASTER RESPONSE",
+        "REHABILITATION OF CANAL COVER",
+        "FIRE TRUCK",
+        "LIGHTHOUSE",
+        "REHABILITATION OF OLD MUNICIPAL BUILDING CONVERTED TO COMMAND CENTER",
+        "RIPRAPPING",
+        "SANDBAGGING"
+      ],
+      "sector": "08_SAFETY AND SECURITY"
+    },
+    {
+      "keywords": [
+        "PASALUBONG CENTER",
+        "HISTORICAL MARKER",
+        "VIEW/ VIEWING DECK",
+        "IMPROVEMENT OF PARKS AND PLAZA",
+        "TOURISM FACILITIES",
+        "FALLS",
+        "ECO-PARK"
+      ],
+      "sector": "09_TOURISM"
+    },
+    {
+      "keywords": [
+        "HOUSING",
+        "TEMPORARY SHELTER",
+        "HOUSING PROJECT",
+        "RELOCATION SITE",
+        "RESETTLEMENT AREAS",
+        "HOUSING FENCE"
+      ],
+      "sector": "10_HOUSING AND SETTLEMENT"
+    },
+    {
+      "keywords": [
+        "INTERNET CONNECTION",
+        "PAGING SYSTEM",
+        "PUBLIC AUDIO SYSTEM",
+        "WIFI"
+      ],
+      "sector": "11_ICT/DIGITAL CONNECTIVITY"
+    },
+    {
+      "keywords": [
+        "COMMUNITY CENTER",
+        "BARANGAY BEAUTIFICATION",
+        "MULTI-PURPOSE HALL",
+        "BLEACHERS",
+        "BURULANG BAYAN",
+        "COVERED COURT",
+        "CONSTRUCTION OF ELEVATOR LOBBY",
+        "HALL",
+        "MULTI-PURPOSE",
+        "GYMNASIUM",
+        "MULTI-PURPOSE BUILDING",
+        "OPEN PARKS/ PLAYGROUND",
+        "SANGGUNIANG KABATAAN OFFICE",
+        "BARANGAY HALL",
+        "MAYOR'S OFFICE",
+        "TREE PARK",
+        "OSCA AND SENIOR CITIZEN FEDERATION BUILDING",
+        "CULTURAL HERITAGE",
+        "RECREATION CENTER",
+        "TOURISM FACILITIES",
+        "TRADING POST",
+        "OPEN PARK",
+        "PARKS/ PERGOLA",
+        "PLAYGROUND",
+        "PLAZA",
+        "REHABILITATION AND IMPROVEMENT OF DISASTER WAREHOUSE",
+        "BASKETBALL COURT",
+        "KUSINA NG BARANGAY",
+        "PUROK HALL",
+        "PWD ACCESSIBILITY",
+        "STOCKROOM",
+        "REPAIR AND MAINTENANCE OF NATIONAL OFFICES",
+        "REPAIR AND REHABILITATION OF ROOFING OF DRRMO /MDRRMO BUILDING"
+      ],
+      "sector": "12_PROPERTY DEVELOPMENT"
+    },
+    {
+      "keywords": [
+        "CEMETERY DEVELOPMENT PROJECT",
+        "COMFORT ROOMS",
+        "CATACOMBS FOR CEMETERY",
+        "CONSTRUCTION OF BARANGAY STAGE",
+        "BODEGA NG BARANGAY",
+        "BOUNDARY MARKER/ LANDMARK",
+        "CEMETERY FENCE",
+        "CONSTRUCTION OF CENTRALIZED PARKING TERMINAL",
+        "COMFORT ROOM",
+        "DIRTY KITCHEN",
+        "KUSINA NG BARANGAY",
+        "IMPOUNDING AREA FOR ANIMAL SHELTER",
+        "CONSTRUCTION OF LACTATING/ BREASTFEEDING AREA",
+        "CONSTRUCTION OF MANPOWER DEVELOPMENT CENTER FOR IPS",
+        "CONSTRUCTION OF MINI PIER",
+        "CONSTRUCTION OF MUNICIPAL MOTORPOOL",
+        "PERIMETER FENCE",
+        "POUNDING CENTER",
+        "CONSTRUCTION OF TODA TERMINAL",
+        "MEMORIAL PARK",
+        "WAITING SHED",
+        "DEMOLITION OF OLD / DILAPIDATED BUILDINGS",
+        "CEMETERY",
+        "SANITARY TOILET",
+        "EVACUATION CENTER",
+        "PUBLIC LATRINE",
+        "ARC"
+      ],
+      "sector": "99_OTHER INFRASTRUCTURE"
+    }
+  ]
 }

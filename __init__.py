@@ -23,6 +23,16 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
+import pathlib
+import sys
+
+
+src_dir = pathlib.Path(__file__).parent.resolve()
+
+pyspellchecker_whl = src_dir / "pyspellchecker.whl"
+if pyspellchecker_whl.exists():
+    sys.path.append(str(pyspellchecker_whl))
+
 
 # noinspection PyPep8Naming
 def classFactory(iface):  # pylint: disable=invalid-name

@@ -1,40 +1,223 @@
 {
-    "categories": [
-        {
-            "keywords": ["hospital", "clinic", "health", "health center", "medical facility", "urgent care", "pharmacy", "ospital", "klinika", "sentro ng kalusugan", "botika"],
-            "sector": "01_HEALTHCARE"
-        },
-        {
-            "keywords": ["school", "university", "college", "educational institution", "vocational training", "adult education", "preschool", "kindergarten", "paaralan", "unibersidad", "kolehiyo", "institusyon ng edukasyon", "bokasyonal na pagsasanay"],
-            "sector": "02_EDUCATION AND LITERACY"
-        },
-        {
-            "keywords": ["library", "community center", "park", "recreation area", "sports complex", "civic center", "museum", "art gallery", "aklatan", "sentro ng komunidad", "parke", "museo", "gallerya ng sining"],
-            "sector": "03_PUBLIC BUILDING AND OPEN SPACE"
-        },
-        {
-            "keywords": ["police", "fire station", "emergency services", "safety", "civil defense", "disaster response", "ambulance", "security", "pulis", "istasyon ng bumbero", "serbisyo pang-emergency", "kaligtasan", "ambulansya", "seguridad"],
-            "sector": "04_PUBLIC SAFETY"
-        },
-        {
-            "keywords": ["farm", "agricultural land", "plantation", "public enterprise", "crop production", "livestock", "agro-industry", "fishing", "bukid", "lupang sakahan", "plantasyon", "produksyon ng pananim", "pangingisda", "agro-industriya"],
-            "sector": "05_AGRICULTURE AND PUBLIC ENTERPRISE"
-        },
-        {
-            "keywords": ["electricity", "water supply", "gas", "sewage", "telecommunications", "internet service", "wastewater treatment", "kuryente", "tubig", "gas", "alkantarilya", "telekomunikasyon", "serbisyo sa internet"],
-            "sector": "06_UTILITY SERVICE"
-        },
-        {
-            "keywords": ["bank", "credit union", "financial services", "investment firm", "insurance company", "loan agency", "microfinance", "savings and loan", "bangko", "serbisyong pinansyal", "kumpanya ng seguro", "loan agency"],
-            "sector": "07_FINANCIAL AND CREDIT INSTITUTION"
-        },
-        {
-            "keywords": ["dump", "waste management", "recycling center", "landfill", "hazardous waste disposal", "composting", "litter collection", "sanitation", "basurahan", "pamamahala ng basura", "tapunan ng basura", "kompost", "kalinisan"],
-            "sector": "08_GARBAGE AND WASTE DISPOSAL"
-        },
-        {
-            "keywords": ["bus", "train", "airport", "taxi", "transportation services", "subway", "bike share", "ride-sharing", "public transport", "bus", "tren", "paliparan", "taxi", "serbisyo sa transportasyon", "pampublikong transportasyon"],
-            "sector": "09_TRANSPORT"
-        }
-    ]
+  "categories": [
+    {
+      "keywords": [
+        "BIRTHING CLINIC",
+        "BLOOD SERVICE CENTER",
+        "BLOOD SERVICE FACILITY",
+        "BOTIKA",
+        "BOTIKA NG BARANGAY",
+        "BOTIKA NG BAYAN",
+        "CENTER",
+        "CHILD CLINIC",
+        "CLINIC",
+        "DENTAL CLINIC",
+        "DIAGNOSTIC CENTER",
+        "DIALYSIS CENTER",
+        "DOCTORS HOSPITAL",
+        "DRUG TREATMENT CENTER",
+        "GENERAL CLINIC",
+        "HABILITATION CENTER",
+        "HEALTH CENTER",
+        "HEALTH POST",
+        "HEALTH STATION",
+        "HOSPITAL",
+        "LABORATORY",
+        "LYING-IN",
+        "LYING-IN CLINIC",
+        "MATERNITY CLINIC",
+        "MEDICAL DIAGNOSTIC",
+        "MENTAL HEALTH CENTER",
+        "PEDIA",
+        "PEDIATRIC CLINIC",
+        "POLYCLINIC",
+        "PRIVATE MEDICAL CLINIC",
+        "PUROK CENTER",
+        "REHABILITATION CENTER",
+        "RHU",
+        "RURAL HEALTH UNIT",
+        "URBAN HEALTH CENTER"
+      ],
+
+      "sector": "01_HEALTHCARE"
+    },
+    {
+      "keywords": [
+        "ACADEMY",
+        "ALS",
+        "ALTERNATIVE LEARNING CENTER",
+        "CHILD DEVELOPMENT CENTER",
+        "CHINESE SCHOOL",
+        "COLLEGE",
+        "DAY CARE",
+        "DAY CARE CENTER",
+        "ELEMENTARY SCHOOL",
+        "GRADE SCHOOL",
+        "JUNIOR HIGH SCHOOL / JHS",
+        "KINDERGARTEN",
+        "LEARNING CENTER",
+        "LIBRARY",
+        "MONTESSORI",
+        "NURSERY",
+        "PAARALAN",
+        "PRESCHOOL",
+        "READING CENTER",
+        "SCHOOL",
+        "SEMINARY",
+        "SENIOR HIGH SCHOOL / SHS",
+        "SPED",
+        "SPED CENTER",
+        "TRAINING INSTITUTE",
+        "TVET",
+        "TVET INSTITUTION",
+        "UNIVERSITY"
+      ],
+      "sector": "02_EDUCATION AND LITERACY"
+    },
+    {
+      "keywords": [
+        "ADOLESCENT FACILITY",
+        "BARANGAY HALL / BRGY HALL",
+        "CEMETERY",
+        "CITY HALL",
+        "CITY VETERINARY OFFICE",
+        "CONFERENCE HALL",
+        "COURT",
+        "COVERED COURT",
+        "DILG",
+        "ECO-PARK",
+        "ENGINEERING OFFICE",
+        "FEEDING CENTER",
+        "GARDEN",
+        "GYMNASIUM",
+        "INDIGENOUS PEOPLE BUILDING",
+        "MEMORIAL PARK",
+        "MULTI-PURPOSE",
+        "MULTI-PURPOSE HALL / BUILDING",
+        "PARK",
+        "PENRO",
+        "PLAZA",
+        "POST OFFICE",
+        "POSTAL OFFICE",
+        "PROVINCIAL CAPITOL",
+        "PUBLIC CEMETERY",
+        "PUBLIC PLAZA",
+        "REGIONAL OFFICE",
+        "SK HALL",
+        "SPORTS CENTER",
+        "SPORTS FACILITY",
+        "TOWN HALL",
+        "TRIAL COURT"
+      ],
+      "sector": "03_PUBLIC BUILDING AND OPEN SPACE"
+    },
+    {
+      "keywords": [
+        "BDRRM",
+        "BDRRMO",
+        "BUREAU OF JAIL MANAGEMENT AND PENOLOGY (BJMP)",
+        "CAMP",
+        "COMMAND CENTER",
+        "DRRMO",
+        "EVACUATION CENTER",
+        "FIRE STATION",
+        "JAIL",
+        "MDRRMO",
+        "MUNICIPAL DISASTER RISK REDUCTION AND MANAGEMENT OFFICE",
+        "POLICE HEADQUARTER",
+        "POLICE STATION",
+        "SUBSTATION"
+      ],
+      "sector": "04_PUBLIC SAFETY"
+    },
+    {
+      "keywords": [
+        "ABATTOIR",
+        "AGRICULTURE WAREHOUSE",
+        "BAGSAKAN",
+        "CORN MILL",
+        "DRESSING PLANT",
+        "DRYER",
+        "FISH LANDING",
+        "FISHPORT",
+        "GO NEGOSYO CENTER",
+        "IRRIGATION SYSTEM",
+        "PUBLIC MARKET",
+        "RICE MILL",
+        "SATELLITE MARKET",
+        "SLAUGHTERHOUSE",
+        "SOLAR DRYER",
+        "STORAGE",
+        "TALIPAPA",
+        "WAREHOUSE",
+        "WET & DRY MARKET"
+      ],
+      "sector": "05_AGRICULTURE AND PUBLIC ENTERPRISE"
+    },
+    {
+      "keywords": [
+        "ARTESIAN/ WELL",
+        "BARANGAY STORAGE",
+        "COMMON TAP",
+        "COMMUNAL FAUCET",
+        "DAM",
+        "RAINWATER COLLECTION",
+        "RESERVOIR",
+        "SALINTUBIG",
+        "STANDPIPE",
+        "STANDPOST",
+        "STOCKROOM",
+        "SUBSTATION",
+        "TANK",
+        "WAREHOUSE",
+        "WATER IMPOUNDING",
+        "WATER SPRING",
+        "WATER SUBSTATION",
+        "WATER SYSTEM",
+        "WATERSHED",
+        "WATERWORKS/ SYSTEM",
+        "WELL",
+        "WINDMILL"
+      ],
+      "sector": "06_UTILITY SERVICE"
+    },
+    {
+      "keywords": [
+        "AL AMANAH ISLAMIC INVESTMENT BANK OF THE PHILIPPINES",
+        "BARANGAY COOPERATIVE",
+        "COOP / COOPERATIVE",
+        "DEVELOPMENT BANK OF THE PHILIPPINES",
+        "LAND BANK OF THE PHILIPPINES",
+        "MULTI-PURPOSE COOP",
+        "OVERSEAS FILIPINO BANK",
+        "PHILIPPINE POSTAL SAVINGS BANK",
+        "PHILIPPINE VETERANS BANK",
+        "UNITED COCONUT PLANTERS BANK"
+      ],
+      "sector": "07_FINANCIAL AND CREDIT INSTITUTION"
+    },
+    {
+      "keywords": [
+        "COMPOST/ PIT",
+        "LANDFILL",
+        "MATERIAL/S RECOVERY/ FACILITY",
+        "MRF",
+        "SANITARY LANDFILL",
+        "WASTE WATER TREATMENT FACILITY"
+      ],
+      "sector": "08_GARBAGE AND WASTE DISPOSAL"
+    },
+    {
+      "keywords": [
+        "AIRPORT",
+        "JEEPNEY TERMINAL",
+        "LAND TRANSPORT TERMINAL",
+        "PANTALAN",
+        "SEAPORT",
+        "TERMINAL",
+        "WHARF"
+      ],
+      "sector": "09_TRANSPORT"
+    }
+  ]
 }
