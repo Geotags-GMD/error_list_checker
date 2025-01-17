@@ -194,131 +194,132 @@ class ErrorListCheckerDialog(QDialog):
     #     print("Encountered Errors:", encountered_errors)  # Debugging: check how errors are grouped
 
 
-    # def run_error_check_sf(self, layer):
-    #     # Define the path to the JSON file within the plugin folder
-    #     plugin_path = os.path.dirname(__file__)
-    #     json_file_path = os.path.join(plugin_path, "validation_criteria_sf.json")
+    def run_error_check_gp(self, layer):
+        # Define the path to the JSON file within the plugin folder
+        plugin_path = os.path.dirname(__file__)
+        json_file_path = os.path.join(plugin_path, "validation_criteria_gp.json")
 
-    #     # Load validation criteria from the JSON file
-    #     try:
-    #         with open(json_file_path, 'r') as json_file:
-    #             validation_criteria = json.load(json_file)
-    #     except Exception as e:
-    #         QMessageBox.critical(self, "Error", f"Failed to load JSON file: {e}")
-    #         return
+        # Load validation criteria from the JSON file
+        try:
+            with open(json_file_path, 'r') as json_file:
+                validation_criteria = json.load(json_file)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load JSON file: {e}")
+            return
 
-    #     # Define the attribute fields
-    #     cbms_geoid_field = 'cbms_geoid'
-    #     fac_name_field = 'fac_name'
-    #     sector_field = 'sector'
+        # Define the attribute fields
+        cbms_geoid_field = 'cbms_geoid'
+        fac_name_field = 'gp_name'
+        sector_field = 'sector'
 
-    #     # Create a new temporary memory layer for storing the error list
-    #     error_layer = QgsVectorLayer("Point?crs=EPSG:4326", "SF Error List", "memory")
-    #     provider = error_layer.dataProvider()
+        # Create a new temporary memory layer for storing the error list
+        error_layer = QgsVectorLayer("Point?crs=EPSG:4326", "GP Error List", "memory")
+        provider = error_layer.dataProvider()
 
-    #     # Add fields for CBMS geoid, recommended category, remark, and encountered errors
-    #     provider.addAttributes([
-    #         QgsField("cbms_geoid", QVariant.String),
-    #         QgsField("suggested_sector", QVariant.String),
-    #         QgsField("remark", QVariant.String),
-    #         QgsField("encountered_errors", QVariant.String)
-    #     ])
-    #     error_layer.updateFields()
+        # Add fields for CBMS geoid, recommended category, remark, and encountered errors
+        provider.addAttributes([
+            QgsField("cbms_geoid", QVariant.String),
+            QgsField("suggested_sector", QVariant.String),
+            QgsField("remark", QVariant.String),
+            QgsField("encountered_errors", QVariant.String)
+        ])
+        error_layer.updateFields()
 
-    #     error_count = 0  # Initialize error count
-    #     encountered_errors = {}  # Dictionary to track errors for the same cbms_geoid
+        error_count = 0  # Initialize error count
+        encountered_errors = {}  # Dictionary to track errors for the same cbms_geoid
 
-    #     # Iterate through features in the selected layer
-    #     for feature in layer.getFeatures():
-    #         fac_name_value = feature[fac_name_field]
-    #         if fac_name_value is None or not str(fac_name_value).strip():
-    #             continue
-    #         fac_name_value = str(fac_name_value).strip()
+        # Iterate through features in the selected layer
+        for feature in layer.getFeatures():
+            fac_name_value = feature[fac_name_field]
+            if fac_name_value is None or not str(fac_name_value).strip():
+                continue
+            fac_name_value = str(fac_name_value).strip()
 
-    #         sector_value = feature[sector_field]  # Sector from the layer
-    #         cbms_geoid = feature[cbms_geoid_field]  # Geoid from the layer
+            sector_value = feature[sector_field]  # Sector from the layer
+            cbms_geoid = feature[cbms_geoid_field]  # Geoid from the layer
 
-    #         matched_sector = None
-    #         keyword_matched = None
-    #         error_messages = []
+            matched_sector = None
+            keyword_matched = None
+            error_messages = []
 
-    #         # Check for spelling errors if enabled
-    #         if self.spelling_check_box.isChecked():
-    #             words = fac_name_value.split()
-    #             misspelled = []
-    #             suggestions = []
+            # Check for spelling errors if enabled
+            if self.spelling_check_box.isChecked():
+                words = fac_name_value.split()
+                misspelled = []
+                suggestions = []
 
-    #             for word in words:
-    #                 correction = self.check_word_spelling(word)
-    #                 if correction:
-    #                     misspelled.append(word)
-    #                     suggestions.append(f"{word} → {correction}")
+                for word in words:
+                    correction = self.check_word_spelling(word)
+                    if correction:
+                        misspelled.append(word)
+                        suggestions.append(f"{word} → {correction}")
 
-    #             if misspelled:
-    #                 error_msg = f"Spelling errors found: {', '.join(misspelled)}"
-    #                 if suggestions:
-    #                     error_msg += f". Suggestions: {'; '.join(suggestions)}"
-    #                 error_messages.append(error_msg)
-    #                 encountered_errors.setdefault(cbms_geoid, {}).setdefault('SPELLING ERROR', []).append(fac_name_value)
+                if misspelled:
+                    error_msg = f"Spelling errors found: {', '.join(misspelled)}"
+                    if suggestions:
+                        error_msg += f". Suggestions: {'; '.join(suggestions)}"
+                    error_messages.append(error_msg)
+                    encountered_errors.setdefault(cbms_geoid, {}).setdefault('SPELLING ERROR', []).append(fac_name_value)
 
-    #         # Check for sector mismatch if enabled
-    #         if self.sector_mismatch_check_box.isChecked():
-    #             words = fac_name_value.split()
+            # Check for sector mismatch if enabled
+            if self.sector_mismatch_check_box.isChecked():
+                words = fac_name_value.split()
 
-    #             # Iterate over each word to match against validation keywords
-    #             for word in words:
-    #                 for category in validation_criteria['categories']:
-    #                     for keyword in category['keywords']:
-    #                         if keyword.lower() == word.lower():
-    #                             matched_sector = category['sector']
-    #                             keyword_matched = keyword
-    #                             break
-    #                     if matched_sector:
-    #                         break
-    #                 if matched_sector:
-    #                     break
+                # Iterate over each word to match against validation keywords
+                for word in words:
+                    for category in validation_criteria['categories']:
+                        for keyword in category['keywords']:
+                            if keyword.lower() == word.lower():
+                                matched_sector = category['sector']
+                                keyword_matched = keyword
+                                break
+                        if matched_sector:
+                            break
+                    if matched_sector:
+                        break
 
-    #             # Add sector mismatch error if applicable
-    #             if matched_sector and matched_sector != sector_value:
-    #                 error_messages.append(
-    #                     f"Incorrect sector: '{sector_value}'. Recommended sector is '{matched_sector}' based on the keyword '{keyword_matched}'. Please verify and update the sector."
-    #                 )
-    #                 encountered_errors.setdefault(cbms_geoid, {}).setdefault('SECTOR MISMATCH', []).append(sector_value)
+                # Add sector mismatch error if applicable
+                if matched_sector and matched_sector != sector_value:
+                    error_messages.append(
+                        f"Incorrect sector: '{sector_value}'. Suggested sector is '{matched_sector}' based on the keyword '{keyword_matched}'. Please verify and update the sector."
+                    )
+                    encountered_errors.setdefault(cbms_geoid, {}).setdefault('MISMATCH', []).append(fac_name_value)
 
-    #         # Create an error feature if errors are found
-    #         if error_messages:
-    #             error_feature = QgsFeature()
-    #             error_feature.setFields(error_layer.fields())
-    #             error_feature.setAttribute("cbms_geoid", cbms_geoid)
-    #             error_feature.setAttribute("suggested_sector", matched_sector if matched_sector else 'N/A')
-    #             error_feature.setAttribute("remark", " ".join(error_messages))
+            # Create an error feature if errors are found
+            if error_messages:
+                error_feature = QgsFeature()
+                error_feature.setFields(error_layer.fields())
+                error_feature.setAttribute("cbms_geoid", cbms_geoid)
+                error_feature.setAttribute("suggested_sector", matched_sector if matched_sector else 'N/A')
+                error_feature.setAttribute("remark", " ".join(error_messages))
 
-    #             # Format encountered errors as a string
-    #             encountered_errors_str = "\n".join([f"{key}: {', '.join(str(v) for v in value)}" for key, value in encountered_errors.get(cbms_geoid, {}).items()])
-    #             error_feature.setAttribute("encountered_errors", encountered_errors_str)
+                # Format encountered errors as a string
+                encountered_errors_str = "\n".join([f"{key}: {', '.join(str(v) for v in value)}" for key, value in encountered_errors.get(cbms_geoid, {}).items()])
+                error_feature.setAttribute("encountered_errors", encountered_errors_str)
 
-    #             # Set geometry if available
-    #             if feature.hasGeometry():
-    #                 geom = feature.geometry().centroid()
-    #                 error_feature.setGeometry(geom)
+                # Set geometry if available
+                if feature.hasGeometry():
+                    geom = feature.geometry().centroid()
+                    error_feature.setGeometry(geom)
 
-    #             provider.addFeature(error_feature)
-    #             error_count += 1
+                provider.addFeature(error_feature)
+                error_count += 1
 
-    #     # Add the error layer to the QGIS project
-    #     QgsProject.instance().addMapLayer(error_layer)
+        # Add the error layer to the QGIS project
+        QgsProject.instance().addMapLayer(error_layer)
 
-    #     # Apply QML styling
-    #     qml_path = os.path.join(plugin_path, "error-list-style.qml")
-    #     if os.path.exists(qml_path):
-    #         error_layer.loadNamedStyle(qml_path)
-    #         error_layer.triggerRepaint()
-    #     else:
-    #         QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
+        # Apply QML styling
+        qml_path = os.path.join(plugin_path, "error-list-style.qml")
+        if os.path.exists(qml_path):
+            error_layer.loadNamedStyle(qml_path)
+            error_layer.triggerRepaint()
+        else:
+            QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
 
-    #     # Show summary of detected errors
-    #     QMessageBox.information(self, "SF Errors", f"SF Errors detected: {error_count}. Please update the errors accordingly.")
-    #     print("Encountered Errors:", encountered_errors)  # Debugging output
+        # Show summary of detected errors
+        QMessageBox.information(self, "GP Errors", f"GP Errors detected: {error_count}. Please update the errors accordingly.")
+        print("Encountered Errors:", encountered_errors)  # Debugging output
+
 
     def run_error_check_sf(self, layer):
         # Define the path to the JSON file within the plugin folder
@@ -368,31 +369,48 @@ class ErrorListCheckerDialog(QDialog):
             keyword_matched = None
             error_messages = []
 
+            # Check for spelling errors if enabled
+            if self.spelling_check_box.isChecked():
+                words = fac_name_value.split()
+                misspelled = []
+                suggestions = []
+
+                for word in words:
+                    correction = self.check_word_spelling(word)
+                    if correction:
+                        misspelled.append(word)
+                        suggestions.append(f"{word} → {correction}")
+
+                if misspelled:
+                    error_msg = f"Spelling errors found: {', '.join(misspelled)}"
+                    if suggestions:
+                        error_msg += f". Suggestions: {'; '.join(suggestions)}"
+                    error_messages.append(error_msg)
+                    encountered_errors.setdefault(cbms_geoid, {}).setdefault('SPELLING ERROR', []).append(fac_name_value)
+
             # Check for sector mismatch if enabled
             if self.sector_mismatch_check_box.isChecked():
-                fac_name_value_lower = fac_name_value.lower()  # Convert fac_name_value to lowercase for case-insensitive comparison
+                words = fac_name_value.split()
 
-                # Iterate over each category and its keywords
-                matched_sector = None
-                keyword_matched = None
-                for category in validation_criteria['categories']:
-                    for keyword in category['keywords']:
-                        # Check if the full keyword is in the fac_name_value
-                        if keyword.lower() in fac_name_value_lower:
-                            matched_sector = category['sector']
-                            keyword_matched = keyword
+                # Iterate over each word to match against validation keywords
+                for word in words:
+                    for category in validation_criteria['categories']:
+                        for keyword in category['keywords']:
+                            if keyword.lower() == word.lower():
+                                matched_sector = category['sector']
+                                keyword_matched = keyword
+                                break
+                        if matched_sector:
                             break
                     if matched_sector:
                         break
 
                 # Add sector mismatch error if applicable
-                if matched_sector and (sector_value is None or str(matched_sector).lower() != str(sector_value).lower()):
+                if matched_sector and matched_sector != sector_value:
                     error_messages.append(
-                        f"Incorrect sector: '{sector_value}'. Recommended sector is '{matched_sector}' based on the keyword '{keyword_matched}'. Please verify and update the sector."
+                        f"Incorrect sector: '{sector_value}'. Suggested sector is '{matched_sector}' based on the keyword '{keyword_matched}'. Please verify and update the sector."
                     )
-                    encountered_errors.setdefault(cbms_geoid, {}).setdefault('SECTOR MISMATCH', []).append(fac_name_value)
-
-
+                    encountered_errors.setdefault(cbms_geoid, {}).setdefault('MISMATCH', []).append(fac_name_value)
 
             # Create an error feature if errors are found
             if error_messages:
@@ -414,142 +432,23 @@ class ErrorListCheckerDialog(QDialog):
                 provider.addFeature(error_feature)
                 error_count += 1
 
-        # Add the error layer to the QGIS project only if errors were detected
-        if error_count > 0:
-            QgsProject.instance().addMapLayer(error_layer)
+        # Add the error layer to the QGIS project
+        QgsProject.instance().addMapLayer(error_layer)
 
-            # Apply QML styling
-            qml_path = os.path.join(plugin_path, "error-list-style.qml")
-            if os.path.exists(qml_path):
-                error_layer.loadNamedStyle(qml_path)
-                error_layer.triggerRepaint()
-            else:
-                QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
-
-            # Show summary of detected errors
-            QMessageBox.information(self, "SF Errors", f"SF Errors detected: {error_count}. Please update the errors accordingly.")
-            print("Encountered Errors:", encountered_errors)
+        # Apply QML styling
+        qml_path = os.path.join(plugin_path, "error-list-style.qml")
+        if os.path.exists(qml_path):
+            error_layer.loadNamedStyle(qml_path)
+            error_layer.triggerRepaint()
         else:
-            # Inform the user that no errors were found
-            QMessageBox.information(self, "SF Errors", "No SF Errors were detected.")
+            QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
 
+        # Show summary of detected errors
+        QMessageBox.information(self, "SF Errors", f"SF Errors detected: {error_count}. Please update the errors accordingly.")
+        print("Encountered Errors:", encountered_errors)  # Debugging output
 
+    
    
-    def run_error_check_gp(self, layer):
-        # Define the path to the JSON file within the plugin folder
-        plugin_path = os.path.dirname(__file__)
-        json_file_path = os.path.join(plugin_path, "validation_criteria_gp.json")
-
-        # Load validation criteria from the JSON file
-        try:
-            with open(json_file_path, 'r') as json_file:
-                validation_criteria = json.load(json_file)
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to load JSON file: {e}")
-            return
-
-        # Define the attribute fields
-        cbms_geoid_field = 'cbms_geoid'  # Field for geoid
-        gp_name_field = 'gp_name'  # Facility name field
-        sector_field = 'sector'  # Sector field
-
-        # Create a new temporary memory layer for storing the error list
-        error_layer = QgsVectorLayer("Point?crs=EPSG:4326", "GP Error List", "memory")
-        provider = error_layer.dataProvider()
-
-        # Add fields for CBMS geoid, recommended category, remark, and encountered errors
-        provider.addAttributes([
-            QgsField("cbms_geoid", QVariant.String),
-            QgsField("suggested_sector", QVariant.String),
-            QgsField("remark", QVariant.String),
-            QgsField("encountered_errors", QVariant.String)  # Add the encountered_errors field
-        ])
-        error_layer.updateFields()
-
-        error_count = 0  # Initialize error count
-        encountered_errors = {}  # Dictionary to track errors for the same cbms_geoid
-
-         # Iterate through features in the selected layer
-        for feature in layer.getFeatures():
-            fac_name_value = feature[gp_name_field]
-            if fac_name_value is None or not str(fac_name_value).strip():
-                continue
-            fac_name_value = str(fac_name_value).strip()
-
-            sector_value = feature[sector_field]  # Sector from the layer
-            cbms_geoid = feature[cbms_geoid_field]  # Geoid from the layer
-
-            matched_sector = None
-            keyword_matched = None
-            error_messages = []
-
-            # Check for sector mismatch if enabled
-            if self.sector_mismatch_check_box.isChecked():
-                fac_name_value_lower = fac_name_value.lower()  # Convert fac_name_value to lowercase for case-insensitive comparison
-
-                # Iterate over each category and its keywords
-                matched_sector = None
-                keyword_matched = None
-                for category in validation_criteria['categories']:
-                    for keyword in category['keywords']:
-                        # Check if the full keyword is in the fac_name_value
-                        if keyword.lower() in fac_name_value_lower:
-                            matched_sector = category['sector']
-                            keyword_matched = keyword
-                            break
-                    if matched_sector:
-                        break
-
-                # Add sector mismatch error if applicable
-                if matched_sector and (sector_value is None or str(matched_sector).lower() != str(sector_value).lower()):
-                    error_messages.append(
-                        f"Incorrect sector: '{sector_value}'. Recommended sector is '{matched_sector}' based on the keyword '{keyword_matched}'. Please verify and update the sector."
-                    )
-                    encountered_errors.setdefault(cbms_geoid, {}).setdefault('SECTOR MISMATCH', []).append(fac_name_value)
-
-
-
-            # Create an error feature if errors are found
-            if error_messages:
-                error_feature = QgsFeature()
-                error_feature.setFields(error_layer.fields())
-                error_feature.setAttribute("cbms_geoid", cbms_geoid)
-                error_feature.setAttribute("suggested_sector", matched_sector if matched_sector else 'N/A')
-                error_feature.setAttribute("remark", " ".join(error_messages))
-
-                # Format encountered errors as a string
-                encountered_errors_str = "\n".join([f"{key}: {', '.join(str(v) for v in value)}" for key, value in encountered_errors.get(cbms_geoid, {}).items()])
-                error_feature.setAttribute("encountered_errors", encountered_errors_str)
-
-                # Set geometry if available
-                if feature.hasGeometry():
-                    geom = feature.geometry().centroid()
-                    error_feature.setGeometry(geom)
-
-                provider.addFeature(error_feature)
-                error_count += 1
-
-        # Add the error layer to the QGIS project only if errors were detected
-        if error_count > 0:
-            QgsProject.instance().addMapLayer(error_layer)
-
-            # Apply QML styling
-            qml_path = os.path.join(plugin_path, "error-list-style.qml")
-            if os.path.exists(qml_path):
-                error_layer.loadNamedStyle(qml_path)
-                error_layer.triggerRepaint()
-            else:
-                QMessageBox.critical(self, "Error", "Failed to find the QML style file.")
-
-            # Show summary of detected errors
-            QMessageBox.information(self, "GP Errors", f"GP Errors detected: {error_count}. Please update the errors accordingly.")
-            print("Encountered Errors:", encountered_errors)
-        else:
-            # Inform the user that no errors were found
-            QMessageBox.information(self, "GP Errors", "No GP Errors were detected.")
-
-
-
     def load_spelling_corrections(self):
         try:
             plugin_dir = os.path.dirname(os.path.abspath(__file__))
