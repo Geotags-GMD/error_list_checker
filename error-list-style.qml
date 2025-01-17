@@ -344,9 +344,9 @@
           </callout>
         </settings>
       </rule>
-      <rule scalemaxdenom="10000" description="Recommended" scalemindenom="40" key="{349f472b-5f14-46f5-85c4-11440924165c}">
+      <rule scalemaxdenom="10000" description="Suggested" scalemindenom="40" key="{349f472b-5f14-46f5-85c4-11440924165c}">
         <settings calloutType="simple">
-          <text-style fontSizeUnit="Point" allowHtml="0" multilineHeight="1" fontSizeMapUnitScale="3x:0,0,0,0,0,0" multilineHeightUnit="Percentage" textColor="202,21,7,255" fontStrikeout="0" isExpression="1" textOpacity="1" previewBkgrdColor="255,255,255,255" fontWordSpacing="0" useSubstitutions="0" capitalization="0" fontItalic="0" legendString="Aa" fontWeight="75" namedStyle="Bold" fontSize="8" forcedBold="0" fontKerning="1" fontFamily="Open Sans" textOrientation="horizontal" fieldName="'RECOMMEND: ' || &quot;recommended_sector&quot;" fontUnderline="0" forcedItalic="0" blendMode="0" fontLetterSpacing="0">
+          <text-style fontSizeUnit="Point" allowHtml="0" multilineHeight="1" fontSizeMapUnitScale="3x:0,0,0,0,0,0" multilineHeightUnit="Percentage" textColor="202,21,7,255" fontStrikeout="0" isExpression="1" textOpacity="1" previewBkgrdColor="255,255,255,255" fontWordSpacing="0" useSubstitutions="0" capitalization="0" fontItalic="0" legendString="Aa" fontWeight="75" namedStyle="Bold" fontSize="8" forcedBold="0" fontKerning="1" fontFamily="Open Sans" textOrientation="horizontal" fieldName="'SUGGESTED: ' || &quot;suggested_sector&quot;" fontUnderline="0" forcedItalic="0" blendMode="0" fontLetterSpacing="0">
             <families/>
             <text-buffer bufferBlendMode="0" bufferSize="0.69999999999999996" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferJoinStyle="128" bufferNoFill="1" bufferSizeUnits="MM" bufferColor="250,250,250,255" bufferOpacity="1"/>
             <text-mask maskedSymbolLayers="" maskEnabled="0" maskSize="0" maskOpacity="1" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskType="0" maskSizeUnits="MM" maskJoinStyle="128"/>
@@ -696,7 +696,7 @@
         </config>
       </editWidget>
     </field>
-    <field configurationFlags="None" name="recommended_sector">
+    <field configurationFlags="None" name="suggested_sector">
       <editWidget type="TextEdit">
         <config>
           <Option/>
@@ -720,25 +720,25 @@
   </fieldConfiguration>
   <aliases>
     <alias index="0" field="cbms_geoid" name=""/>
-    <alias index="1" field="recommended_sector" name=""/>
+    <alias index="1" field="suggested_sector" name=""/>
     <alias index="2" field="remark" name=""/>
     <alias index="3" field="encountered_errors" name=""/>
   </aliases>
   <defaults>
     <default field="cbms_geoid" expression="" applyOnUpdate="0"/>
-    <default field="recommended_sector" expression="" applyOnUpdate="0"/>
+    <default field="suggested_sector" expression="" applyOnUpdate="0"/>
     <default field="remark" expression="" applyOnUpdate="0"/>
     <default field="encountered_errors" expression="" applyOnUpdate="0"/>
   </defaults>
   <constraints>
     <constraint field="cbms_geoid" notnull_strength="0" constraints="0" exp_strength="0" unique_strength="0"/>
-    <constraint field="recommended_sector" notnull_strength="0" constraints="0" exp_strength="0" unique_strength="0"/>
+    <constraint field="suggested_sector" notnull_strength="0" constraints="0" exp_strength="0" unique_strength="0"/>
     <constraint field="remark" notnull_strength="0" constraints="0" exp_strength="0" unique_strength="0"/>
     <constraint field="encountered_errors" notnull_strength="0" constraints="0" exp_strength="0" unique_strength="0"/>
   </constraints>
   <constraintExpressions>
     <constraint field="cbms_geoid" exp="" desc=""/>
-    <constraint field="recommended_sector" exp="" desc=""/>
+    <constraint field="suggested_sector" exp="" desc=""/>
     <constraint field="remark" exp="" desc=""/>
     <constraint field="encountered_errors" exp="" desc=""/>
   </constraintExpressions>
@@ -749,7 +749,7 @@
   <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
     <columns>
       <column width="-1" type="field" hidden="0" name="cbms_geoid"/>
-      <column width="-1" type="field" hidden="0" name="recommended_sector"/>
+      <column width="-1" type="field" hidden="0" name="suggested_sector"/>
       <column width="-1" type="field" hidden="0" name="remark"/>
       <column width="-1" type="field" hidden="0" name="encountered_errors"/>
       <column width="-1" type="actions" hidden="1"/>
@@ -786,19 +786,19 @@ def my_form_open(dialog, layer, feature):
   <editable>
     <field name="cbms_geoid" editable="1"/>
     <field name="encountered_errors" editable="1"/>
-    <field name="recommended_sector" editable="1"/>
+    <field name="suggested_sector" editable="1"/>
     <field name="remark" editable="1"/>
   </editable>
   <labelOnTop>
     <field labelOnTop="0" name="cbms_geoid"/>
     <field labelOnTop="0" name="encountered_errors"/>
-    <field labelOnTop="0" name="recommended_sector"/>
+    <field labelOnTop="0" name="suggested_sector"/>
     <field labelOnTop="0" name="remark"/>
   </labelOnTop>
   <reuseLastValue>
     <field name="cbms_geoid" reuseLastValue="0"/>
     <field name="encountered_errors" reuseLastValue="0"/>
-    <field name="recommended_sector" reuseLastValue="0"/>
+    <field name="suggested_sector" reuseLastValue="0"/>
     <field name="remark" reuseLastValue="0"/>
   </reuseLastValue>
   <dataDefinedFieldProperties/>
